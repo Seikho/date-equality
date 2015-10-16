@@ -1,3 +1,7 @@
+export function startDay(): number;
+
+export function endDay(): number;
+
 export function startOfWeek(dayNumber: number): void;
 
 export function sameDate(left: Date, right: Date): boolean;
