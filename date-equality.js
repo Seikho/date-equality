@@ -17,13 +17,13 @@ function sameDate(left, right) {
     return sameYear && sameMonth && sameDay;
 }
 exports.sameDate = sameDate;
-function sameWeek(left, right) {
+function sameWeek(left, right, startOfWeek) {
     var sameYear = left.getFullYear() === right.getFullYear();
     var sameMonth = left.getMonth() === right.getMonth();
     if (!sameYear || !sameMonth)
         return false;
-    var leftFloor = floorWeek(left);
-    var leftCeil = ceilWeek(left);
+    var leftFloor = floorWeek(left, startOfWeek);
+    var leftCeil = ceilWeek(left, startOfWeek);
     return right >= leftFloor && right <= leftCeil;
 }
 exports.sameWeek = sameWeek;
