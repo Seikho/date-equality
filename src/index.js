@@ -5,6 +5,14 @@ function startOfWeek(dayNumber) {
     endDayOfWeek = startDayOfWeek === 0 ? 6 : this.startDay() - 1;
 }
 exports.startOfWeek = startOfWeek;
+function startDay() {
+    return startDayOfWeek;
+}
+exports.startDay = startDay;
+function endDay() {
+    return endDayOfWeek;
+}
+exports.endDay = endDay;
 function sameDate(left, right) {
     var sameYear = left.getFullYear() === right.getFullYear();
     var sameMonth = left.getMonth() === right.getMonth();
@@ -22,6 +30,10 @@ function sameWeek(left, right) {
     return right >= leftFloor && right <= leftCeil;
 }
 exports.sameWeek = sameWeek;
+function inRange(date, dateRange) {
+    return date >= dateRange.start && date <= dateRange.end;
+}
+exports.inRange = inRange;
 function sameDateTime(left, right) {
     var sameHour = left.getHours() === right.getHours();
     var sameMinutes = left.getMinutes() === right.getMinutes();
