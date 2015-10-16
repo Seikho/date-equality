@@ -1,7 +1,7 @@
 import chai = require('chai');
 import * as Types from '../index';
 
-import DE = require('../src');
+import DE = require('../date-equality');
 var expect = chai.expect;
 
 var baseDate = new Date(2015, 0, 1); // Thu, 1 Jan 2015
