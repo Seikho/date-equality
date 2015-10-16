@@ -5,7 +5,7 @@ var endDayOfWeek = 6;
 
 export function startOfWeek(dayNumber: number) {
     startDayOfWeek = Math.abs(dayNumber) % 7;
-    endDayOfWeek = startDayOfWeek === 0 ? 6 : this.startDay() - 1;
+    endDayOfWeek = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
 }
 
 export function startDay() {
