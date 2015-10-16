@@ -1,16 +1,29 @@
-var startDayOfWeek = 0;
-var endDayOfWeek = 6;
+var startDayOfWeek = (function () {
+    var dayNumber = 0;
+    return function (dayOfWeek) {
+        if (dayOfWeek == null)
+            return dayNumber;
+        dayNumber = Math.abs(dayOfWeek) % 7;
+        return dayNumber;
+    };
+})();
+var endDayOfWeek = (function () {
+    var dayNumber = 6;
+    return function () {
+        dayNumber = startDay() === 0 ? 6 : startDay() - 1;
+        return dayNumber;
+    };
+})();
 function startOfWeek(dayNumber) {
-    startDayOfWeek = Math.abs(dayNumber) % 7;
-    endDayOfWeek = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
+    startDayOfWeek(dayNumber);
 }
 exports.startOfWeek = startOfWeek;
 function startDay() {
-    return startDayOfWeek;
+    return startDayOfWeek();
 }
 exports.startDay = startDay;
 function endDay() {
-    return endDayOfWeek;
+    return endDayOfWeek();
 }
 exports.endDay = endDay;
 function sameDate(left, right) {
@@ -51,7 +64,7 @@ function ceilDay(date) {
 exports.ceilDay = ceilDay;
 function floorWeek(date) {
     var currentDay = date.getDay();
-    var toDay = startDayOfWeek;
+    var toDay = startDay();
     var downDate = new Date(date.getTime());
     if (currentDay > toDay)
         downDate.setDate(downDate.getDate() - (currentDay - toDay));
@@ -62,7 +75,7 @@ function floorWeek(date) {
 exports.floorWeek = floorWeek;
 function ceilWeek(date) {
     var currentDay = date.getDay();
-    var toDay = endDayOfWeek;
+    var toDay = endDay();
     var upDate = new Date(date.getTime());
     if (currentDay > toDay)
         upDate.setDate(upDate.getDate() + (7 - currentDay + toDay));

@@ -1,19 +1,33 @@
 import DE = require('./index.d.ts');
 
-var startDayOfWeek = 0;
-var endDayOfWeek = 6;
+var startDayOfWeek = (function() {
+    var dayNumber = 0;
+
+    return (dayOfWeek?: number) => {
+        if (dayOfWeek == null) return dayNumber;
+        dayNumber = Math.abs(dayOfWeek) % 7;
+        return dayNumber;
+    }
+})();
+
+var endDayOfWeek = (function() {
+    var dayNumber = 6;
+    return () => {
+        dayNumber = startDay() === 0 ? 6 : startDay() - 1;
+        return dayNumber;
+    }
+})();
 
 export function startOfWeek(dayNumber: number) {
-    startDayOfWeek = Math.abs(dayNumber) % 7;
-    endDayOfWeek = startDayOfWeek === 0 ? 6 : startDayOfWeek - 1;
+    startDayOfWeek(dayNumber);
 }
 
 export function startDay() {
-    return startDayOfWeek;
+    return startDayOfWeek();
 }
 
 export function endDay() {
-    return endDayOfWeek;
+    return endDayOfWeek();
 }
 
 export function sameDate(left: Date, right: Date) {
@@ -57,7 +71,7 @@ export function ceilDay(date: Date) {
 
 export function floorWeek(date: Date) {
     var currentDay = date.getDay();
-    var toDay = startDayOfWeek;
+    var toDay = startDay();
     var downDate = new Date(date.getTime());
 
     if (currentDay > toDay)
@@ -71,7 +85,7 @@ export function floorWeek(date: Date) {
 
 export function ceilWeek(date: Date) {
     var currentDay = date.getDay();
-    var toDay = endDayOfWeek;
+    var toDay = endDay();
     var upDate = new Date(date.getTime());
 
     if (currentDay > toDay)
