@@ -1,4 +1,4 @@
-import DE = require('../index.d.ts');
+import DE = require('./index.d.ts');
 
 var startDayOfWeek = 0;
 var endDayOfWeek = 6;
