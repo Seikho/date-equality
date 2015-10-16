@@ -1,0 +1,32 @@
+{
+  "name": "date-equality",
+  "version": "0.1.0",
+  "description": "Broader date equality checking and mutating",
+  "main": "src/index",
+  "scripts": {
+    "test": "mocha",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seikho/date-equality.git"
+  },
+  "keywords": [
+    "javascript",
+    "typescript",
+    "date",
+    "equality",
+    "range"
+  ],
+  "author": "Carl Winkler",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/seikho/date-equality/issues"
+  },
+  "homepage": "https://github.com/seikho/date-equality#readme",
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "mocha": "^2.3.3",
+    "typescript": "^1.6.2"
+  }
+}
