@@ -1,33 +1,13 @@
 import DE = require('./index.d.ts');
 
-var startDayOfWeek = (function() {
-    var dayNumber = 0;
-
-    return (dayOfWeek?: number) => {
-        if (dayOfWeek == null) return dayNumber;
-        dayNumber = Math.abs(dayOfWeek) % 7;
-        return dayNumber;
-    }
-})();
-
-var endDayOfWeek = (function() {
-    var dayNumber = 6;
-    return () => {
-        dayNumber = startDay() === 0 ? 6 : startDay() - 1;
-        return dayNumber;
-    }
-})();
-
-export function startOfWeek(dayNumber: number) {
-    startDayOfWeek(dayNumber);
+export function startDay(dayNumber?: number) {
+    if (dayNumber == null) return 0;
+    return Math.abs(dayNumber) % 7;
 }
 
-export function startDay() {
-    return startDayOfWeek();
-}
-
-export function endDay() {
-    return endDayOfWeek();
+export function endDay(dayNumber?: number) {
+    if (dayNumber == null) return 6;    
+    return dayNumber === 0 ? 6 : dayNumber - 1;
 }
 
 export function sameDate(left: Date, right: Date) {
@@ -69,9 +49,9 @@ export function ceilDay(date: Date) {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999);
 }
 
-export function floorWeek(date: Date) {
+export function floorWeek(date: Date, startOfWeek?: number) {
     var currentDay = date.getDay();
-    var toDay = startDay();
+    var toDay = startDay(startOfWeek);
     var downDate = new Date(date.getTime());
 
     if (currentDay > toDay)
@@ -83,9 +63,9 @@ export function floorWeek(date: Date) {
     return floorDay(downDate);
 }
 
-export function ceilWeek(date: Date) {
+export function ceilWeek(date: Date, startOfWeek?: number) {
     var currentDay = date.getDay();
-    var toDay = endDay();
+    var toDay = endDay(startOfWeek);
     var upDate = new Date(date.getTime());
 
     if (currentDay > toDay)

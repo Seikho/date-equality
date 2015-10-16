@@ -1,8 +1,6 @@
-export function startDay(): number;
+export function startDay(dayNumber?: number): number;
 
-export function endDay(): number;
-
-export function startOfWeek(dayNumber: number): void;
+export function endDay(dayNumber?: number): number;
 
 export function sameDate(left: Date, right: Date): boolean;
 
