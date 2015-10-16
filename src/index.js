@@ -1,89 +1,78 @@
-import DE = require('../index.d.ts');
-
 var startDayOfWeek = 0;
 var endDayOfWeek = 6;
-
-export function startOfWeek(dayNumber: number) {
+function startOfWeek(dayNumber) {
     startDayOfWeek = Math.abs(dayNumber) % 7;
     endDayOfWeek = startDayOfWeek === 0 ? 6 : this.startDay() - 1;
 }
-
-export function sameDate(left: Date, right: Date) {
+exports.startOfWeek = startOfWeek;
+function sameDate(left, right) {
     var sameYear = left.getFullYear() === right.getFullYear();
     var sameMonth = left.getMonth() === right.getMonth();
     var sameDay = left.getDate() === right.getDate();
-
     return sameYear && sameMonth && sameDay;
 }
-
-export function sameWeek(left: Date, right: Date) {
+exports.sameDate = sameDate;
+function sameWeek(left, right) {
     var sameYear = left.getFullYear() === right.getFullYear();
     var sameMonth = left.getMonth() === right.getMonth();
-    if (!sameYear || !sameMonth) return false;
-
+    if (!sameYear || !sameMonth)
+        return false;
     var leftFloor = floorWeek(left);
     var leftCeil = ceilWeek(left);
-
     return right >= leftFloor && right <= leftCeil;
 }
-
-export function sameDateTime(left: Date, right: Date) {
+exports.sameWeek = sameWeek;
+function sameDateTime(left, right) {
     var sameHour = left.getHours() === right.getHours();
     var sameMinutes = left.getMinutes() === right.getMinutes();
     var sameSeconds = left.getSeconds() === right.getSeconds();
-
     return sameDate(left, right) && sameHour && sameMinutes && sameSeconds;
 }
-
-export function floorDay(date: Date) {
+exports.sameDateTime = sameDateTime;
+function floorDay(date) {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate());
 }
-
-export function ceilDay(date: Date) {
+exports.floorDay = floorDay;
+function ceilDay(date) {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59, 999);
 }
-
-export function floorWeek(date: Date) {
+exports.ceilDay = ceilDay;
+function floorWeek(date) {
     var currentDay = date.getDay();
     var toDay = startDayOfWeek;
     var downDate = new Date(date.getTime());
-
     if (currentDay > toDay)
         downDate.setDate(downDate.getDate() - (currentDay - toDay));
-
     if (currentDay < toDay)
         downDate.setDate(downDate.getDate() - (currentDay + (7 - toDay)));
-
     return floorDay(downDate);
 }
-
-export function ceilWeek(date: Date) {
+exports.floorWeek = floorWeek;
+function ceilWeek(date) {
     var currentDay = date.getDay();
     var toDay = endDayOfWeek;
     var upDate = new Date(date.getTime());
-
     if (currentDay > toDay)
         upDate.setDate(upDate.getDate() + (7 - currentDay + toDay));
-
     if (currentDay < toDay)
         upDate.setDate(upDate.getDate() + (toDay - currentDay));
-
     return ceilDay(upDate);
 }
-
-export function dateRange(dates: Array<Date>): DE.DateRange {
+exports.ceilWeek = ceilWeek;
+function dateRange(dates) {
     var start, end;
-
-    dates.forEach(date => {
-        if (start == null || date < start) start = new Date(date.getTime());
-        if (end == null || date > end) end = new Date(date.getTime());
+    dates.forEach(function (date) {
+        if (start == null || date < start)
+            start = new Date(date.getTime());
+        if (end == null || date > end)
+            end = new Date(date.getTime());
     });
-
-    if (start == null) start = new Date();
-    if (end == null) end = new Date(start.getTime());
-        
+    if (start == null)
+        start = new Date();
+    if (end == null)
+        end = new Date(start.getTime());
     start = floorDay(start);
     end = ceilDay(end);
-
-    return { start, end };
+    return { start: start, end: end };
 }
+exports.dateRange = dateRange;
