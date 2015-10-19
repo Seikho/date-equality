@@ -23,12 +23,6 @@ var DE = require('date-equality');
 
 ### API
 
-#### startOfWeek
-Set the start day of week for sameWeek, floorWeek and ceilWeek functions.
-```javascript
-function startOfWeek(dayNumber: number): void;
-```
-
 #### sameDate
 Returns true if the two provided `Date` objects are on the same date
 ```javascript
@@ -38,7 +32,7 @@ function sameDate(left: Date, right: Date): boolean;
 Returns true if the two provided `Date` objects are in the same week
 #### sameWeek
 ```javascript
-function sameWeek(left: Date, right: Date): boolean;
+function sameWeek(left: Date, right: Date, startOfWeek?: number): boolean;
 ```
 
 Returns true if the two provided `Date` objects have the same time (second precision)
@@ -63,14 +57,14 @@ function ceilDay(date: Date): Date;
 #### floorWeek
 Returns a new `Date` object that is the beginning of the week and floored (`floorDay(Date)`)  
 ```javascript
-function floorWeek(date: Date): Date;
+function floorWeek(date: Date, startOfWeek?: number): Date;
 ```
 
 
 #### ceilWeek
 Returns a new `Date` object that is the end of the week and ceiled (`ceilDay(Date)`)
 ```javascript
-function ceilWeek(date: Date): Date;
+function ceilWeek(date: Date, startOfWeek?: number): Date;
 ```
 
 
