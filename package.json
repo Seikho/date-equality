@@ -1,6 +1,6 @@
 {
   "name": "date-equality",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Broader date equality checking and mutating",
   "main": "./date-equality",
   "scripts": {
